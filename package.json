@@ -1,0 +1,15 @@
+{
+  "name": "Bamazon",
+  "version": "0.1.0",
+  "description": "An Amazon clone",
+  "main": "popSongs.js",
+  "scripts": {
+    "start": "node bamazonCustomer.js"
+  },
+  "dependencies": {
+    "inquirer": "^3.2.3",
+    "mysql": "^2.14.1"
+  },
+  "author": "Kelcey Asuao",
+  "license": ""
+}
