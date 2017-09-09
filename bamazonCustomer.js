@@ -51,7 +51,7 @@ function askId(){
   inquirer.prompt({
     name: "item_id",
     type: "input",
-    message: "Please enter the ID of the item you would like to order."
+    message: "Please enter the ID of the item you would like to order.\n"
   }).then(function(answer){
     item_id = answer.item_id
     // running the askQuantity function from in here so it keeps going through the process.
