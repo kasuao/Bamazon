@@ -27,7 +27,7 @@ function displayAll(){
 			console.log(res[i].item_id + " | " + res[i].product_name + " | " + res[i].department_name + " | " + " $ " +  res[i].price + " | " + res[i].stock_quantity);
 		}
 		console.log("---------------------------------------------");
-		console.log("PRESS ENTER TO PLACE YOUR ORDER");
+		console.log("Enter the item number to select the item you want to order.");
 	});
 };
 
@@ -39,7 +39,7 @@ function askQuestions(){
 	inquirer.prompt({
 		name: "item_id",
 		type: "input",
-		message: "Please enter the ID of the item you would like to order."
+		message: "Please enter the ID of the item you would like to order.\n"
 	},
 	// The second message should ask how many units of the product they would 
 	// like to buy.
@@ -51,7 +51,8 @@ function askQuestions(){
 		var query = "SELECT product_name, price, stock_quantity FROM products WHERE ?"; 
 		connection.query(query, {item_id: answer.item_id}, function(err, res){
 			for (var i = 0; i < res.length; i++) {
-				console.log("Product Name: " + res[i].product_name + " | Price: " + res[i].price + " | Order Quantity" + answer.order_quantity);
+
+				console.log("You have chosen the following\n Product Name: " + res[i].product_name + " | Price: " + res[i].price + " | Order Quantity: " + answer.order_quantity);
 			};
 		});
 	});
