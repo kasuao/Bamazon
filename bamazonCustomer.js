@@ -19,6 +19,7 @@ var item_id = "";
 var order_quantity = "";
 var stock_quantity = "";
 var product_name = "";
+var price = "";
 
 //error handling
 connection.connect(function(err){
@@ -79,6 +80,7 @@ function sendQuery(){
    	 // store stock_quantity and product_name in a variable for use in next step/function.
 	 stock_quantity = res[i].stock_quantity;
 	 product_name = res[i].product_name;
+	 price = res[i].price;
    };
    checkStock();
   });
@@ -106,9 +108,34 @@ function checkStock(){
 function updateDB(){
 	// update stock_quantity to be (stock_quantity - order_quantity).
 	var newStock = stock_quantity - order_quantity;
+	// the query to update a db would be
+	
+	// connection.query([{column: updated value},
+		connection.query(
+			// UPDATE [table name] SET ? WHERE ?,
+			"UPDATE products SET ? WHERE ?",
+			[
+				{
+					stock_quantity: newStock
+				},
+				{
+					// {row: chosenRow}], identifies the row where the column item needs
+					// to be updated.
+					item_id: item_id						
+				}
+			]);
+
 	// log updated inventory.
+	console.log("The inventory has been updated\n");
+	console.log(product_name + " now has " + newStock + " in stock.");
+	totalCost();
+};
+
+function totalCost(){
 	// store the totalCost in a variable.
+	var cost = order_quantity * price;
 	// log "The price of your purchase is " + totalCost
+	console.log("The price of your purchase is $ " + cost);
 };
 
 
